@@ -1,0 +1,43 @@
+#! /usr/bin/env python3
+
+'''
+@Author: Saksham Trivedi
+@alias: - SK -
+@Title: Writing-Files
+@Description: To write and modify files using script
+'''
+
+def file_modification():
+    
+    # Writing to a file
+    with open("TextFiles/Novel_Ch_1.txt", "w") as file:
+        file.write("It was a dark stormy night")
+    
+    # Appending to a file
+    with open("TextFiles/Novel_Ch_1.txt", "a") as file:
+        file.write("And the crazy wind was blowing")
+
+    # Reading
+    with open("TextFiles/Novel_Ch_1.txt", "r") as file:
+        print(file.read())
+    
+    # Exclusively writing to a file
+    with open("TextFiles/Novel_Ch_2.txt", "x") as file:
+        file.write("It was a dark stormy night")
+
+    # Exclusively writing to a file
+    with open("TextFiles/Novel_Ch_3.txt", "x+") as file:
+        file.write("It was a dark stormy night")
+        print(file.read())
+        
+    # Read + write to a file (File needs to exist)
+    with open("TextFiles/Novel_Ch_4.txt", "r+") as file:
+        file.write("It was a dark stormy night")
+        print(file.read())
+
+    # Exit Status
+    return 0
+ 
+
+# Calling Funtion
+file_modification()
