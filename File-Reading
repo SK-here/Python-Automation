@@ -11,7 +11,7 @@
 def file_reading():
 
     # Opening File
-    file = open ("ExampleFile.txt")
+    file = open ("TextFiles/ExampleFile.txt")
 
     # Reading File (Single Line) 
     print ("Reading Line...", end='\n\n')
@@ -28,13 +28,13 @@ def file_reading():
     file.close()
 
     # Opening and automatically closing fil
-    with open("ExampleFile.txt") as file:
+    with open("TextFiles/ExampleFile.txt") as file:
         print (file.readline())
 
         print (file.read)
 
     # Iteration over file
-    with open ("AnotherExample.txt") as file:
+    with open ("TextFiles/AnotherExample.txt") as file:
         for line in file:
             # Prints each Line
             print (line)
@@ -46,7 +46,7 @@ def file_reading():
             print (line.strip().upper())
             
     # To store a file
-    file = open ("AnotherExample.txt")
+    file = open ("TextFiles/AnotherExample.txt")
     lines = file.readlines()
     file.close()
    
