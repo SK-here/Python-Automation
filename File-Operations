@@ -1,0 +1,123 @@
+#! /usr/bin/env python3
+
+'''
+@Author: Saksham Trivedi
+@alias: - SK -
+@Title: File-Operations
+@Description: Script to work with files
+@Operations: Create & Delete Files, Reading File Meta Info,
+'''
+
+import os
+
+# Cass
+class FileOpenrations(object):
+    
+    #Delete Mehtod
+    def delete(self, File):
+        # Will Throw FileNotFoundError if file doesn't exists
+        os.remove(File)     
+        # Exit Status
+        return 0
+    
+    # File Rename Method
+    def file_rename(self, OldFile, NewFile):
+        os.rename (OldFile, NewFile)
+        return 0
+    
+    # File Exists or not
+    def file_exists(self, File):
+        if os.path.exists(File):
+            print ("File Exists")
+        else:
+            print("File Doesnt Exists")
+        
+        # Exit Status
+        return 0
+    
+    # Method to get filesize in KB
+    def filesize(self, File):
+        
+        # First It check whether the file exists or not
+        if os.path.isfile(File):
+            # Return filesize in bytes
+            size_in_bytes = os.path.getsize(File)
+            # Converting filesize in KB
+            size_in_kb = size_in_bytes / 1024
+            print (str(size_in_kb) + " KB")
+        else:
+            print(os.path.isfile(file))
+            print("File not found")
+            
+        # Exit Status
+        return 0
+    
+    # To get file modification time
+    def get_mod_time(self, File):
+        
+        # Time return in Unix Timestamp
+        timestamp = os.path.getmtime(File)
+        # Converting the time into Human Readable Format
+        import datetime
+        datetime.datetime.fromtimestamp(timestamp)
+
+        # Exit Status
+        return 0
+    
+    # Method to get Absolute path of a file
+    def get_path(self, File):
+
+        # Fetching absolute path
+        AbsolutePath = os.path.abspath(File)
+        print (AbsolutePath)
+        
+        return 0
+        
+        
+
+class DirecortyOperations(object):
+    
+    # To check which current directory your Python program is executing in
+    def exec_dir(self):
+        print(os.getcwd())
+        
+        return 0
+    
+    # To create a directory
+    def new_dir(self, DirName):
+        os.mkdir(DirName)
+        print(str(os.getcwd()) + "/" + str(DirName))
+        
+        return 0
+
+    # To remove Empty dir
+    def remove_dir(self, DirName):
+        os.rmdir(DirName)
+        print(str(os.getcwd()) + '/' + str(DirName) + 'Removed Successfully')
+        
+        return 0
+    
+    # Listing Contents of a directory
+    def list_contents(self, DirName):
+        
+        for content in os.listdir(DirName):
+            FullName = os.path.join(DirName, content)
+            
+            if os.path.isdir(FullName):
+                print ("Directory: {}".format(FullName))
+            else:                   
+                print ("File:      {}".format(FullName))
+        
+        
+
+
+
+
+
+
+        
+# Object of a Class
+FileOpenration = FileOpenrations()
+
+# Acessing the Member Funtion
+FileOpenration.delete("TextFiles/delete-file")
