@@ -118,6 +118,14 @@ with open("Novel_Ch_1.txt", "w") as file:
     file.write("It was a dark stormy night")
 ```
 
+#### Parsing
+
+Parsing a file means analyzing it's content to correctly structure the data.
+
+#### CSV
+
+CSV *`(Comma Seperated Values)`* are another form of file used to store data as segment of text seperated by commas `,`.
+
 .
 
 .
