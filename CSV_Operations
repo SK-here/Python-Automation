@@ -1,0 +1,61 @@
+#! /usr/bin/env python3
+
+'''
+@Author: Saksham Trivedi
+@alias: - SK -
+@Title: CSV_Oprations
+@Descrption: A Script to perform CSV Operations
+'''
+
+import csv
+
+class CSV_Operations:
+
+    def __init__(self, File):
+        self.File = File
+        self.num_columns = 0
+        self.data_columns = []
+
+    # Method to dynamically read the CSV File
+    def read_csv(self):
+        with open(self.File, 'r') as File:
+            csv_reader = csv.reader(File)
+
+            # Read the header row to determine the number of columns
+            header = next(csv_reader)
+            self.num_columns = len(header)
+
+            # Create a list of variables to store data for each column
+            self.data_columns = [None] * self.num_columns
+
+            # Loop through the rows in the CSV File
+            for row in csv_reader:
+                if len(row) != self.num_columns:
+                    print("Warning: Row has a different number of columns than the header.")
+                    continue
+
+                # Assign each value to the corresponding variable
+                for i in range(self.num_columns):
+                    if self.data_columns[i] is None:
+                        self.data_columns[i] = []  # Initialize the variable as a list
+                    self.data_columns[i].append(row[i])
+    
+    # Method to Print CSV data
+    def print_data(self):
+        if not self.data_columns:
+            print("No Data to Display. Read The CSV File First.")
+            return
+
+        for i, data_column in enumerate(self.data_columns):
+            print(f"Data from Column-{i + 1}: {data_column}")
+
+# Sample Usage
+
+# Object of a class
+CSV = CSV_Operations('your_csv_File.csv')
+
+# Reading The CSV File
+CSV.read_csv()
+
+# Printing the Data
+CSV.print_data()
