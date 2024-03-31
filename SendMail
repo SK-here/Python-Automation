@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+import os
+import smtplib
+
+# Imports Passwd from env var
+EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
+EMAIL_PASSWD = os.environ.get('EMAIL_PASS')
+
+# Establishing an connection to a gmail server
+with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+    smtp.ehlo ()
+    smtp.starttls()
+    smtp.ehlo()
+
+    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWD) 
+
+    subject = 'Test Subject'
+
+    body = ' This is a test email'
+
+    msg = f'Subject: {subject}\n\n{body}'
+
+    # Format: Sender, Receiver & msg
+    smtp.sendmail (EMAIL_ADDRESS, 'trivedianuj171@gmail.com', msg)
