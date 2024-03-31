@@ -1,3 +1,10 @@
+'''
+@Author: Saksham Trivedi
+@alias: SK
+@Email: trivedisaksham@gmail.com
+@Github: https://github.com/SK-here
+@Description: A script to send email.
+'''
 #!/usr/bin/python3
 
 import os
