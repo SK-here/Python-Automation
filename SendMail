@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 '''
 @Author: Saksham Trivedi
 @alias: SK
@@ -5,7 +7,6 @@
 @Github: https://github.com/SK-here
 @Description: A script to send email.
 '''
-#!/usr/bin/python3
 
 import os
 import smtplib
@@ -15,18 +16,39 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
 EMAIL_PASSWD = os.environ.get('EMAIL_PASS')
 
 # Establishing an connection to a gmail server
-with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-    smtp.ehlo ()
-    smtp.starttls()
-    smtp.ehlo()
+#   with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+#       smtp.ehlo ()
+#       smtp.starttls()
+#       smtp.ehlo()
+#       smtp.login(EMAIL_ADDRESS, EMAIL_PASSWD) 
 
+#       subject = 'Test Subject'
+#       body = ' This is a test email'
+
+#       msg = f'Subject: {subject}\n\n{body}'
+
+#       # Format: Sender, Receiver & msg
+#       smtp.sendmail (EMAIL_ADDRESS, 'trivedianuj171@gmail.com', msg)
+
+#-------------------- Another Method --------------------
+# Instead of starting a session creating a tls session and
+# then closing it we can use more secure SSL channel to send
+# email plus using email.message library we can define a structured
+# way for our message instead of just dumping it to a file
+
+from email.message import EmailMessage 
+
+msg = EmailMessage()
+
+msg['Subject'] = 'Test Message'
+msg['From'] = EMAIL_ADDRESS
+msg['To'] = 'trivedianuj171@gmail.com'
+msg['Cc'] = ['trivedisaksham@gmail.com', 'mistersolo009@gmail.com', 'linuxadminjbp@vsndirect.com']
+msg.set_content('''
+                This is a content of a message
+                ''')
+
+with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWD) 
 
-    subject = 'Test Subject'
-
-    body = ' This is a test email'
-
-    msg = f'Subject: {subject}\n\n{body}'
-
-    # Format: Sender, Receiver & msg
-    smtp.sendmail (EMAIL_ADDRESS, 'trivedianuj171@gmail.com', msg)
+    smtp.send_message(msg)
