@@ -8,7 +8,7 @@ from datetime import datetime
 log_file = datetime.now().strftime("%d-%m-%Y") + '.log'
 log_dir = 'daily-logs'
 
-logfile = open(log_dir + '/' + log_file)
+logs = open(log_dir + '/' + log_file)
 
-for i in (log_file):
-    print(logfile.readline( ))
+for log in (logs):
+    print(logs.readline( ))
