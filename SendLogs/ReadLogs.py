@@ -11,4 +11,4 @@ log_dir = 'daily-logs'
 logs = open(log_dir + '/' + log_file)
 
 for log in (logs):
-    print(logs.readline( ))
+    print(log.readline( ))
