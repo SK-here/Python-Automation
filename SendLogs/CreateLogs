@@ -1,0 +1,76 @@
+#!/bin/python3
+
+import subprocess
+
+# List of host IP addresses
+hosts = [
+            '172.25.250.11', 
+            '172.25.250.12', 
+            '172.25.250.13', 
+            '172.25.250.14', 
+            '172.25.250.15', 
+            '172.25.250.16'
+        ]
+
+# SSH username and SSH private key path
+username = 'admin'
+ssh_key = '/home/admin/.ssh/ansible_key'
+
+# Command to run on each host
+check_hostname = 'hostname'
+disk_space = 'df -Th'
+srv_uptime = 'uptime'
+srv_pretty_uptime = 'uptime -p'
+
+hostnames = {}
+disk_stats = {}
+uptime_servers = {}
+pretty_uptime_servers = {}
+
+for host in hosts:
+
+    # Using Try block to Hangle Error
+    try:
+
+        # Running hostnamectl on every host 
+        hostname = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', check_hostname],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        hostnames[host] = hostname.strip()
+    
+        # Checking Disk Space
+        disk_space = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', disk_space],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        disk_stats[host] = disk_space.strip()
+    
+        # Server Uptime 
+        server_uptime = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', disk_space],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        uptime_servers[host] = server_uptime.strip()
+
+        # Server Uptime in Pretty Format
+        server_uptime_pretty = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', disk_space],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        pretty_uptime_servers[host] = server_uptime_pretty.strip()
+
+    # Execption Handling
+    except subprocess.CalledProcessError as e:
+        hostnames[host] = f"Error: {e.hostname.strip()}"
+
+# Print the output for each host
+for host, hostname in hostnames.items(), :
+    i = 0
+    print (f'Details for server {hosts[i]} Are')
+    print ("Hostname: " + hostname, end='\n\n')
+    i = i + 1
