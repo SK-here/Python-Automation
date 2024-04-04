@@ -1,0 +1,116 @@
+-------------------------------------------------------------------------------------------
+Details for Server 172.25.250.11 are:
+
+Hostname: node1.lab.net
+
+Server uptime: 13:03:54 up 21:59,  0 users,  load average: 0.02, 0.07, 0.03
+
+Server uptime: up 21 hours, 59 minutes
+
+Disk space for 172.25.250.11: Filesystem            Type      Size  Used Avail Use% Mounted on
+devtmpfs              devtmpfs  970M     0  970M   0% /dev
+tmpfs                 tmpfs     989M     0  989M   0% /dev/shm
+tmpfs                 tmpfs     989M  8.5M  981M   1% /run
+tmpfs                 tmpfs     989M     0  989M   0% /sys/fs/cgroup
+/dev/mapper/rhel-root xfs        23G  3.2G   20G  14% /
+/dev/sda1             xfs      1014M  185M  830M  19% /boot
+tmpfs                 tmpfs     198M     0  198M   0% /run/user/1000
+
+
+-------------------------------------------------------------------------------------------
+Details for Server 172.25.250.12 are:
+
+Hostname: node2.lab.net
+
+Server uptime: 12:00:58 up 2 days, 18:15,  0 users,  load average: 0.00, 0.00, 0.00
+
+Server uptime: up 2 days, 18 hours, 15 minutes
+
+Disk space for 172.25.250.12: Filesystem            Type      Size  Used Avail Use% Mounted on
+devtmpfs              devtmpfs  970M     0  970M   0% /dev
+tmpfs                 tmpfs     989M     0  989M   0% /dev/shm
+tmpfs                 tmpfs     989M  8.5M  981M   1% /run
+tmpfs                 tmpfs     989M     0  989M   0% /sys/fs/cgroup
+/dev/mapper/rhel-root xfs        23G  3.2G   20G  14% /
+/dev/sda1             xfs      1014M  185M  830M  19% /boot
+tmpfs                 tmpfs     198M     0  198M   0% /run/user/1000
+
+
+-------------------------------------------------------------------------------------------
+Details for Server 172.25.250.13 are:
+
+Hostname: node3.lab.net
+
+Server uptime: 12:00:52 up 2 days, 18:15,  0 users,  load average: 0.00, 0.01, 0.00
+
+Server uptime: up 2 days, 18 hours, 15 minutes
+
+Disk space for 172.25.250.13: Filesystem               Type      Size  Used Avail Use% Mounted on
+devtmpfs                 devtmpfs  970M     0  970M   0% /dev
+tmpfs                    tmpfs     989M     0  989M   0% /dev/shm
+tmpfs                    tmpfs     989M  8.6M  981M   1% /run
+tmpfs                    tmpfs     989M     0  989M   0% /sys/fs/cgroup
+/dev/mapper/rhel-root    xfs        23G  3.3G   20G  15% /
+/dev/sda1                xfs      1014M  185M  830M  19% /boot
+/dev/mapper/test_vg-test xfs      1014M   40M  975M   4% /tmp
+tmpfs                    tmpfs     198M     0  198M   0% /run/user/1000
+
+
+-------------------------------------------------------------------------------------------
+Details for Server 172.25.250.14 are:
+
+Hostname: node4.lab.net
+
+Server uptime: 12:00:46 up 2 days, 18:15,  0 users,  load average: 0.02, 0.02, 0.00
+
+Server uptime: up 2 days, 18 hours, 15 minutes
+
+Disk space for 172.25.250.14: Filesystem            Type      Size  Used Avail Use% Mounted on
+devtmpfs              devtmpfs  970M     0  970M   0% /dev
+tmpfs                 tmpfs     989M     0  989M   0% /dev/shm
+tmpfs                 tmpfs     989M  8.5M  981M   1% /run
+tmpfs                 tmpfs     989M     0  989M   0% /sys/fs/cgroup
+/dev/mapper/rhel-root xfs        23G  3.2G   20G  14% /
+/dev/sda1             xfs      1014M  185M  830M  19% /boot
+tmpfs                 tmpfs     198M     0  198M   0% /run/user/1000
+
+
+-------------------------------------------------------------------------------------------
+Details for Server 172.25.250.15 are:
+
+Hostname: node5.lab.net
+
+Server uptime: 12:00:40 up 2 days, 18:15,  0 users,  load average: 0.00, 0.00, 0.00
+
+Server uptime: up 2 days, 18 hours, 15 minutes
+
+Disk space for 172.25.250.15: Filesystem            Type      Size  Used Avail Use% Mounted on
+devtmpfs              devtmpfs  970M     0  970M   0% /dev
+tmpfs                 tmpfs     989M     0  989M   0% /dev/shm
+tmpfs                 tmpfs     989M  8.5M  981M   1% /run
+tmpfs                 tmpfs     989M     0  989M   0% /sys/fs/cgroup
+/dev/mapper/rhel-root xfs        23G  3.2G   20G  14% /
+/dev/sda1             xfs      1014M  185M  830M  19% /boot
+tmpfs                 tmpfs     198M     0  198M   0% /run/user/1000
+
+
+-------------------------------------------------------------------------------------------
+Details for Server 172.25.250.16 are:
+
+Hostname: node6.lab.net
+
+Server uptime: 12:00:35 up 2 days, 18:14,  0 users,  load average: 0.00, 0.00, 0.00
+
+Server uptime: up 2 days, 18 hours, 14 minutes
+
+Disk space for 172.25.250.16: Filesystem               Type      Size  Used Avail Use% Mounted on
+devtmpfs                 devtmpfs  970M     0  970M   0% /dev
+tmpfs                    tmpfs     989M     0  989M   0% /dev/shm
+tmpfs                    tmpfs     989M  8.6M  981M   1% /run
+tmpfs                    tmpfs     989M     0  989M   0% /sys/fs/cgroup
+/dev/mapper/rhel-root    xfs        23G  3.3G   20G  15% /
+/dev/sda1                xfs      1014M  185M  830M  19% /boot
+/dev/mapper/test_vg-test xfs      1014M   40M  975M   4% /tmp
+tmpfs                    tmpfs     198M     0  198M   0% /run/user/1000
+
+
