@@ -1,0 +1,79 @@
+#!/bin/python3
+
+import subprocess
+
+# List of host IP addresses
+hosts = [
+            '172.27.0.11',
+            '172.27.0.12',
+            '172.27.0.13',
+            '172.27.0.14',
+            '172.27.0.15',
+            '172.27.0.16'
+        ]
+
+# SSH username and SSH private key path
+username = 'admin'
+ssh_key = '/home/admin/.ssh/id_rsa'
+
+# Commands to run on each host
+check_hostname = 'hostname'
+disk_space = 'echo "$(df -Th)" '
+srv_uptime = 'uptime'
+srv_pretty_uptime = 'echo `(uptime -p)` '
+
+hostnames = {}
+disk_stats = {}
+uptime_servers = {}
+pretty_uptime_servers = {}
+
+for host in hosts:
+    try:
+        # Running commands on each host
+        hostname = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', check_hostname],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        hostnames[host] = hostname.strip()
+    except subprocess.CalledProcessError as error:
+        hostnames[host] = f"Error: {error.output.strip()}"
+        
+    try:
+        disk_space_output = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', disk_space],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        disk_stats[host] = disk_space_output.strip()
+    except subprocess.CalledProcessError as error:
+        disk_stats[host] = f"Error: {error.output.strip()}"
+
+    try:
+        uptime_output = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', srv_uptime],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        uptime_servers[host] = uptime_output.strip()
+    except subprocess.CalledProcessError as error:
+        uptime_output[host] = f"Error: {error.output.strip()}"
+
+    try:
+        pretty_uptime_output = subprocess.check_output(
+            ['ssh', '-i', ssh_key, f'{username}@{host}', srv_pretty_uptime],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        pretty_uptime_servers[host] = pretty_uptime_output.strip()
+    except subprocess.CalledProcessError as error:
+        pretty_uptime_output[host] = f"Error: {error.output.strip()}"
+
+# Print the output for each host
+for host in hosts:
+    print ('-------------------------------------------------------------------------------------------')
+    print(f"Details for Server {host} are:", end='\n\n')
+    print(f"Hostname: {hostnames.get(host, 'Not Available')}", end='\n\n')
+    print(f"Server uptime: {uptime_servers.get(host, 'Not Available')}", end='\n\n')
+    print(f"Server uptime: {pretty_uptime_servers.get(host, 'Not Available')}", end='\n\n')
+    print(f"Disk space for {host}: {disk_stats.get(host, 'Not Available')}", end='\n\n\n')
