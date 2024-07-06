@@ -1,0 +1,81 @@
+#!/bin/python3
+
+import subprocess
+
+# List of host IP addresses
+hosts = [
+            '172.27.0.5',
+            '172.27.0.6',
+            '172.27.0.7',
+            '172.27.0.8',
+            '172.27.0.11',
+            '172.27.0.14',
+            '172.27.0.18',
+            '172.27.0.35',
+            '172.27.0.36',
+            '172.27.0.37',
+            '172.27.0.38',
+            '172.27.0.44',
+            '172.27.0.45',
+            '172.27.0.47',
+            '172.27.0.48',
+            '172.27.0.130',
+            '172.27.0.150'
+        ]
+
+# SSH username and SSH private key path
+username = 'erpnoc'
+ssh_key = '/home/admin/.ssh/id_rsa'
+
+# Commands to run on each host
+check_hostname = 'hostname'
+disk_space = 'echo "$(df -Th)" '
+srv_uptime = 'uptime'
+srv_pretty_uptime = 'echo `(uptime -p)` '
+
+hostnames = {}
+disk_stats = {}
+uptime_servers = {}
+pretty_uptime_servers = {}
+
+for host in hosts:
+    try:
+        # Running commands on each host
+        hostname = subprocess.check_output(
+            ['ssh', f'{username}@{host}', check_hostname],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        hostnames[host] = hostname.strip()
+        
+        disk_space_output = subprocess.check_output(
+            ['ssh', f'{username}@{host}', disk_space],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        disk_stats[host] = disk_space_output.strip()
+
+        uptime_output = subprocess.check_output(
+            ['ssh', f'{username}@{host}', srv_uptime],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        uptime_servers[host] = uptime_output.strip()
+
+        pretty_uptime_output = subprocess.check_output(
+            ['ssh', f'{username}@{host}', srv_pretty_uptime],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        pretty_uptime_servers[host] = pretty_uptime_output.strip()
+    except subprocess.CalledProcessError as error:
+        hostnames[host] = f"Error: {error.output.strip()}"
+
+# Print the output for each host
+for host in hosts:
+    print ('-------------------------------------------------------------------------------------------')
+    print(f"Details for Server {host} are:", end='\n\n')
+    print(f"Hostname: {hostnames.get(host, 'Not Available')}", end='\n\n')
+    print(f"Server uptime: {uptime_servers.get(host, 'Not Available')}", end='\n\n')
+    print(f"Server uptime: {pretty_uptime_servers.get(host, 'Not Available')}", end='\n\n')
+    print(f"Disk space for {host}: {disk_stats.get(host, 'Not Available')}", end='\n\n\n')
