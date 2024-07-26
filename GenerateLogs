@@ -1,0 +1,109 @@
+#!/bin/python3
+
+import subprocess
+
+# List of host IP addresses
+hosts = [
+        # Production Servers
+            '172.27.0.35',   # Prod App1
+            '172.27.0.36',   # Prod App2
+            '172.27.0.37',   # Prod DB1
+            '172.27.0.38',   # Prod DB2
+        # Iservices
+            '172.27.0.170',  # Iservices (new)
+            '172.27.0.144',  # UAT Iservices
+            '172.27.0.130',  # Iservices
+        # UAT
+            '172.27.0.44',   # ERPUAT ECC
+            '172.27.0.45',   # ERPUAT App1
+            '172.27.0.46',   # ERPUAT App2
+            '172.27.0.47',   # ERP UAT DB1
+            '172.27.0.48',   # ERP UAT DB2
+        # SIT
+            '172.27.0.5',    # EBS SIT App1
+            '172.27.0.6',    # EBS SIT DB2
+            '172.27.0.7',    # EBS SIT DB1
+            '172.27.0.8',    # EBS SIT DB2
+        # TEST Instances (Prodution Replica)
+            '172.27.0.15',   # TEST App1
+            '172.27.0.16',   # TEST App2
+            '172.27.0.17',   # TEST DB1
+            '172.27.0.19',   # TEST DB2
+        # FTP
+            '172.27.0.150',  # FTP Server
+        # EBS
+            '172.27.0.14',   # EBSDEV
+            '172.27.0.18',   # EBSQA
+        # ECC
+            '172.27.0.34',   # ECC Dashboard
+        # EBIZ Production
+            '172.27.0.25',   # Ebizprodapp1
+            '172.27.0.26',   # Ebizprodapp2
+            '172.27.0.27',   # Ebizproddb1
+            '172.27.0.28',   # Ebizproddb2
+        # Quality Assurance
+            '172.27.0.11',   # DEVQADB
+        # Honeypot
+            '172.27.0.141'   # Honeypot Server
+        ]
+
+#   # SSH username and SSH private key path
+username = 'erpnoc'
+ssh_key = '/home/admin/.ssh/id_rsa'
+
+############################################### MODIFIED CODDE ##################################################
+
+# Commands to run on each host
+check_hostname = 'hostname'
+disk_space = 'df -Th | awk \'$6+0 > 85 {print $0}\''
+srv_uptime = 'uptime'
+srv_pretty_uptime = 'echo `(uptime -p)` '
+
+# hosts = ['host1', 'host2', 'host3']  # Replace with your actual hostnames
+
+hostnames = {}
+disk_stats = {}
+uptime_servers = {}
+pretty_uptime_servers = {}
+
+for host in hosts:
+    try:
+        # Running commands on each host
+        hostname = subprocess.check_output(
+            ['ssh', f'{username}@{host}', check_hostname],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        hostnames[host] = hostname.strip()
+
+        disk_space_output = subprocess.check_output(
+            ['ssh', f'{username}@{host}', disk_space],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        disk_stats[host] = disk_space_output.strip()
+
+        uptime_output = subprocess.check_output(
+            ['ssh', f'{username}@{host}', srv_uptime],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        uptime_servers[host] = uptime_output.strip()
+
+        pretty_uptime_output = subprocess.check_output(
+            ['ssh', f'{username}@{host}', srv_pretty_uptime],
+            universal_newlines=True,
+            stderr=subprocess.STDOUT
+        )
+        pretty_uptime_servers[host] = pretty_uptime_output.strip()
+    except subprocess.CalledProcessError as error:
+        hostnames[host] = f"Error: {error.output.strip()}"
+
+    # Print the output for each host
+for host in hosts:
+    if disk_stats.get(host):
+        print('---------------------------------------------------------------------')
+        print(f"Details for Server {host} are:", end='\n\n')
+        print(f"Hostname: {hostnames.get(host, 'Not Available')}", end='\n\n')
+        print(f"Server uptime: {uptime_servers.get(host, 'Not Available')}", end='\n\n')
+        print(f"Disk space for {host} with usage above 85%:\n{disk_stats.get(host)}", end='\n\n\n')
