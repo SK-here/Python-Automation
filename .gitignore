@@ -1,4 +1,5 @@
+./.gitignore
 Basics/.ipynb_checkpoints/*
 OS-Interaction/.ipynb_checkpoints/*
-.ipynb_checkpoints/*
+*.ipynb_checkpoints*
 100DaysOfPython/.ipynb_checkpoints/*
