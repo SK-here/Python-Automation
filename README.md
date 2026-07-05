@@ -2,16 +2,29 @@
 
 This repo contains python basics & automation scripts.
 
-Below are Files/Directories along with it's description 
+### Python-Tutuorials/Basics/:
+- Python Introduction
+- COnditional Statements
+- While Loop
+- For Loop
+- Strings
+- Lists
+- Tuples
+- Mutables Vs Immutables
+- Dictionaries
+- Sets
+- OOPs
+- File Handling
+- Error Handling
+- More Things Python (Python Extended)
 
-- **Basics** : *Contains all the python fundamentals*
+### Ceaser Ciphers
+- Encryption
+- Decryption
 
-- **Jupyter-Keybindings** : Contains all the Jupyter keyboard Shortcuts 
-
-`(Jupyter Keybindings for efficient use)`
-
+### Archived 
+- Some Archived Automation Scripts for various server use cases (Very old servers)
 
 Copyrighted &copy; Material
-
 ### Thanks
-### SK
+SK
