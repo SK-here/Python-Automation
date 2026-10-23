@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import requests
+import json
+import os
+import sys
+import logging
+import time
+import random
+import string
+import asyncio 
+
+# Fetch API Key from local environment variable to set up gemini api credentials
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+GEMINI_API_SECRET = os.environ.get('GEMINI_API_SECRET')    
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Set up the base URL for the Gemini API
+GEMINI_API_URL = 'https://api.gemini.com/v1'
+
+# setup the counter to restrict api calling for 15 requests per minute
+REQUEST_LIMIT = 15
+
+# Set up a counter to track the number of requests made
+request_count = 0
+
+# Set up a timestamp to track the time of the last request
+last_request_time = time.time()
+
+# Define a function to make requests to the Gemini API
+def make_gemini_request(endpoint, params=None):
+    global request_count, last_request_time
+    # Check if the request limit has been reached
+    if request_count >= REQUEST_LIMIT:
+        # Calculate the time since the last request
+        time_since_last_request = time.time() - last_request_time
+        # If it's been less than a minute, wait until a minute has passed
+        if time_since_last_request < 60:
+            wait_time = 60 - time_since_last_request
+            logging.info(f"Request limit reached. Waiting for {wait_time:.2f} seconds before making the next request.")
+            time.sleep(wait_time)   
+
+
